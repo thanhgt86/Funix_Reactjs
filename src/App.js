@@ -8,19 +8,19 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   dishes: DISHES,
-    // };
+    this.state = {
+      person: STAFFS,
+    };
   }
   render() {
     return (
       <div className="App">
-        <Navbar dark color="primary" className="ml-auto">
+        <Navbar dark color="primary">
           <div>
             <NavbarBrand href="/">Ứng dụng quản lý nhân sự v1.0</NavbarBrand>
           </div>
         </Navbar>
-        {/* <StaffList /> */}
+        <StaffList staffs={this.state.person} />
       </div>
     );
   }
