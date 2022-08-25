@@ -13,30 +13,45 @@ class StaffList extends Component {
     super(props);
 
     this.state = {
-      onSelectedStaff: null
-    }
+      onSelectedStaff: null,
+    };
   }
 
   onStaffSelect(staff) {
-    this.setState({onSelectedStaff: staff})
+    this.setState({ onSelectedStaff: staff });
   }
 
-renderStaff(staff) {
-  if (staff != null) {
-    return (
-      <div className="col-12 col-md-5 m-1">
-<Card>
-  <CardImg width='100%' src={staff.image} alt={staff.name} />
-  
-</Card>
-      </div>
-    )
+  renderStaff(staff) {
+    if (staff != null) {
+      return (
+        <div className="col-12 col-md-5 m-1">
+          <Card>
+            <CardImg width="100%" src={staff.image} alt={staff.name} />
+            <CardBody></CardBody>
+          </Card>
+        </div>
+      );
+    }
   }
-}
 
   render() {
-    
-    return ();
+    const staff = this.props.staffs.map((person) => {
+      return (
+        <div key={person.id} className="col-12 col-md-5 m-1">
+          <Card onClick={() => this.onStaffSelect(person)}>
+            <CardTitle>{person.name}</CardTitle>
+          </Card>
+        </div>
+      );
+    });
+    return (
+      <div>
+        <div className="row">{staff}</div>
+        <div className="row">
+          <p>Bấm vào để xem thông tin nhân viên</p>
+        </div>
+      </div>
+    );
   }
 }
 
