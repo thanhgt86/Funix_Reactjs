@@ -61,7 +61,7 @@ class StaffList extends Component {
       return (
         <div className={this.state.columDefault}>
           <Card key={person.id} onClick={() => this.onStaffSelect(person)}>
-            <CardTitle>{person.name}</CardTitle>
+            <CardTitle className="mx-auto my-2">{person.name}</CardTitle>
           </Card>
         </div>
       );
