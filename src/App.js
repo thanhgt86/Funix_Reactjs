@@ -3,7 +3,8 @@ import logo from "./logo.svg";
 import { Navbar, NavbarBrand } from "reactstrap";
 import StaffList from "./components/StaffListComponent";
 import "./App.css";
-import { DEPARTMENTS, ROLE, STAFFS } from "./shared/staffs";
+import { STAFFS } from "./shared/staffs";
+
 class App extends Component {
   constructor(props) {
     super(props);
