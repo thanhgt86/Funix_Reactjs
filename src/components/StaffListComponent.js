@@ -59,8 +59,8 @@ class StaffList extends Component {
   render() {
     const staff = this.props.staffs.map((person) => {
       return (
-        <div key={person.id} className="col-12 col-md-5 m-1">
-          <Card onClick={() => this.onStaffSelect(person)}>
+        <div className={this.state.columDefault}>
+          <Card key={person.id} onClick={() => this.onStaffSelect(person)}>
             <CardTitle>{person.name}</CardTitle>
           </Card>
         </div>
@@ -68,6 +68,11 @@ class StaffList extends Component {
     });
     return (
       <div>
+        <div className="row m-3">
+          <button onClick={() => this.onColumnSelect("col-md-2 mt-1")}>
+            6 cột
+          </button>
+        </div>
         <div className="row">{staff}</div>
         <div>
           <p>Bấm vào để xem thông tin nhân viên</p>
