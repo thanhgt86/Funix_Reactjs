@@ -4,6 +4,8 @@ import { Navbar, NavbarBrand } from "reactstrap";
 import StaffList from "./components/StaffListComponent";
 import "./App.css";
 import { STAFFS } from "./shared/staffs";
+import Header from "./components/HeaderComponent";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -15,14 +17,19 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <Navbar dark color="primary">
-          <div>
-            <NavbarBrand href="/">Ứng dụng quản lý nhân sự v1.0</NavbarBrand>
-          </div>
-        </Navbar>
-        <StaffList staffs={this.state.person} />
-      </div>
+      <BrowserRouter>
+        <div>
+          <Header />
+          <Switch>
+            <Route
+              exact
+              path="/stafflist"
+              component={() => <StaffList staffs={this.state.person} />}
+            />
+            <Redirect to="/stafflist" />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
