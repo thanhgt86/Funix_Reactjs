@@ -61,6 +61,7 @@ class StaffList extends Component {
       return (
         <div className={this.state.columDefault}>
           <Card key={person.id} onClick={() => this.onStaffSelect(person)}>
+            <CardImg width="100%" src={person.image} alt={person.name} />
             <CardTitle className="mx-auto my-2">{person.name}</CardTitle>
           </Card>
         </div>
