@@ -16,18 +16,11 @@ class StaffList extends Component {
 
     this.state = {
       onSelectedStaff: null,
-      columDefault: "col-12 col-md-6 col-lg-4 mt-3",
     };
   }
 
   onStaffSelect(staff) {
     this.setState({ onSelectedStaff: staff });
-  }
-
-  onColumnSelect(col) {
-    this.setState({
-      columDefault: col,
-    });
   }
 
   renderStaff(staff) {
@@ -59,7 +52,7 @@ class StaffList extends Component {
   render() {
     const staff = this.props.staffs.map((person) => {
       return (
-        <div className={this.state.columDefault}>
+        <div className="col-md-2 col-sm-4 col-xs-6">
           <Card key={person.id} onClick={() => this.onStaffSelect(person)}>
             <CardImg width="100%" src={person.image} alt={person.name} />
             <CardTitle className="mx-auto my-2">{person.name}</CardTitle>
@@ -69,42 +62,7 @@ class StaffList extends Component {
     });
     return (
       <div className="container">
-        <div className="row m-3">
-          <button
-            onClick={() => this.onColumnSelect("col-md-2 mt-3")}
-            className="btn btn-warning mr-3"
-          >
-            6 cột
-          </button>
-
-          <button
-            onClick={() => this.onColumnSelect("col-md-3 mt-3")}
-            className="btn btn-warning mr-3"
-          >
-            4 cột
-          </button>
-
-          <button
-            onClick={() => this.onColumnSelect("col-md-4 mt-3")}
-            className="btn btn-warning mr-3"
-          >
-            3 cột
-          </button>
-
-          <button
-            onClick={() => this.onColumnSelect("col-md-6 mt-3")}
-            className="btn btn-warning mr-3"
-          >
-            2 cột
-          </button>
-
-          <button
-            onClick={() => this.onColumnSelect("col-md-12 mt-3")}
-            className="btn btn-warning mr-3"
-          >
-            1 cột
-          </button>
-        </div>
+        <h3>Nhân Viên</h3> <hr />
         <div className="row">{staff}</div>
         <div className="mt-3">
           <p>Bấm vào để xem thông tin nhân viên</p>

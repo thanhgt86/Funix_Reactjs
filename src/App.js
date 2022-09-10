@@ -5,6 +5,7 @@ import StaffList from "./components/StaffListComponent";
 import "./App.css";
 import { STAFFS } from "./shared/staffs";
 import Header from "./components/HeaderComponent";
+import Footer from "./components/FooterComponent";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
             />
             <Redirect to="/stafflist" />
           </Switch>
+          <Footer />
         </div>
       </BrowserRouter>
     );
