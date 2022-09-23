@@ -4,9 +4,11 @@ import { Navbar, NavbarBrand } from "reactstrap";
 import StaffList from "./StaffListComponent";
 import PersonDetail from "./PersonDetailComponent";
 import { STAFFS } from "../shared/staffs";
+import { DEPARTMENTS } from "../shared/staffs";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import Department from "./Department";
 
 class Main extends Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class Main extends Component {
 
     this.state = {
       person: STAFFS,
+      department: DEPARTMENTS,
     };
   }
 
@@ -42,6 +45,11 @@ class Main extends Component {
           />
 
           <Route exact path="/stafflist/:personId" component={PersonWithId} />
+          <Route
+            exact
+            path="/department"
+            component={() => <Department department={this.state.department} />}
+          />
           <Redirect to="/stafflist" />
         </Switch>
         <Footer />
