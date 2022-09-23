@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Navbar, NavbarBrand } from "reactstrap";
 import StaffList from "./StaffListComponent";
-
+import PersonDetail from "./PersonDetailComponent";
 import { STAFFS } from "../shared/staffs";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
@@ -16,7 +16,21 @@ class Main extends Component {
       person: STAFFS,
     };
   }
+
   render() {
+    const PersonWithId = ({ match }) => {
+      console.log(match.params);
+      return (
+        <PersonDetail
+          person={
+            this.state.person.filter(
+              (staff) => staff.id === parseInt(match.params.personId, 10)
+            )[0]
+          }
+        />
+      );
+    };
+
     return (
       <div>
         <Header />
@@ -26,6 +40,8 @@ class Main extends Component {
             path="/stafflist"
             component={() => <StaffList staffs={this.state.person} />}
           />
+
+          <Route exact path="/stafflist/:personId" component={PersonWithId} />
           <Redirect to="/stafflist" />
         </Switch>
         <Footer />
