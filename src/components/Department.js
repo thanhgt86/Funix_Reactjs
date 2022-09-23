@@ -16,16 +16,28 @@ function Department(props) {
   console.log(props);
   const depa = props.department.map((depart) => {
     return (
-      <div className="col-md-2 col-sm-4 col-xs-6">
+      <div className="col-md-4 col-sm-6 col-xs-12">
         <Card>
           <CardBody>
-            <CardTitle>{depa.name}</CardTitle>
-            <CardText>{depa.numberOfStaff}</CardText>
+            <CardTitle>{depart.name}</CardTitle>
+            <CardText>Số lượng nhân viên: {depart.numberOfStaff}</CardText>
           </CardBody>
-        </Card>
+        </Card>{" "}
+        <br />
       </div>
     );
   });
+
+  return (
+    <div className="container">
+      <br />
+      <h4>Departments: </h4>
+      <br />
+
+      <div className="row">{depa}</div>
+      <br />
+    </div>
+  );
 }
 
 export default Department;
