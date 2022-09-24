@@ -1,28 +1,28 @@
 import React, { Component } from "react";
+import "../App.css";
 import {
   Card,
-  CardImg,
-  CardImgOverlay,
   CardText,
   CardTitle,
   CardBody,
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 function Salary(props) {
   const salary = props.salary.map((sal) => {
     return (
       <div className="col-md-4 col-sm-6 col-xs-12">
         <br />
-        <Card>
+        <Card className="salaryarea">
+          <CardTitle className="mt-1 ml-1">{sal.name}</CardTitle>
           <CardBody>
-            <CardTitle>{sal.name}</CardTitle>
             <CardText>Mã nhân viên: {sal.id}</CardText>
             <CardText>Hệ số lương: {sal.salaryScale}</CardText>
             <CardText>Số ngày làm thêm: {sal.overTime}</CardText>
             <Card className="bg-light">
-              <CardText className="offset-1">
+              <CardText className="offset-1 mt-1 mb-1 ">
                 Lương:{" "}
                 {Math.round(sal.salaryScale * 3000000 + sal.overTime * 200000)}
               </CardText>
@@ -34,10 +34,14 @@ function Salary(props) {
   });
   return (
     <div className="container">
-      {/* <Breadcrumb>
-        <BreadcrumbItem></BreadcrumbItem>
-      </Breadcrumb> */}
-      <div className="row">{salary}</div>
+      <Breadcrumb>
+        <BreadcrumbItem>
+          <Link to="/stafflist">Nhân viên</Link>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
+      </Breadcrumb>
+      <div className="row">{salary}</div> <br />
     </div>
   );
 }

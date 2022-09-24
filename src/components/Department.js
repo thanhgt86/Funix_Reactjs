@@ -15,7 +15,7 @@ function Department(props) {
   const depa = props.department.map((depart) => {
     return (
       <div className="col-md-4 col-sm-6 col-xs-12">
-        <Card>
+        <Card className="departarea">
           <CardBody>
             <CardTitle>{depart.name}</CardTitle>
             <CardText>Số lượng nhân viên: {depart.numberOfStaff}</CardText>

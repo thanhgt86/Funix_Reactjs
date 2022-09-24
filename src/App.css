@@ -52,3 +52,11 @@ address{
     transform: translateX(100%);
     transition: all 300ms ease-out;
 }
+
+.salaryarea {
+    background-color: rgb(244, 245, 228);
+}
+
+.departarea {
+    background-color: rgb(227, 255, 225);
+}
