@@ -9,6 +9,7 @@ import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Department from "./Department";
+import Salary from "./Salary";
 
 class Main extends Component {
   constructor(props) {
@@ -50,6 +51,13 @@ class Main extends Component {
             path="/department"
             component={() => <Department department={this.state.department} />}
           />
+
+          <Route
+            exact
+            path="/salary"
+            component={() => <Salary salary={this.state.person} />}
+          />
+
           <Redirect to="/stafflist" />
         </Switch>
         <Footer />
