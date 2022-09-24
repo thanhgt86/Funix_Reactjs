@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  Card,
-  CardImg,
-  CardImgOverlay,
-  CardText,
-  CardTitle,
-  CardBody,
-  Breadcrumb,
-  BreadcrumbItem,
-} from "reactstrap";
+import { Card, CardImg, CardTitle } from "reactstrap";
 
 class StaffList extends Component {
   constructor(props) {

@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Card,
-  CardImg,
-  CardImgOverlay,
-  CardText,
-  CardTitle,
-  CardBody,
-  Breadcrumb,
-  BreadcrumbItem,
-} from "reactstrap";
+import { Card, CardText, CardTitle, CardBody } from "reactstrap";
 
 function Department(props) {
   console.log(props);
