@@ -80,10 +80,18 @@ class StaffList extends Component {
     });
   };
 
-  handleSubmit(event) {
-    console.log("Current State is: " + JSON.stringify(this.state));
-    alert("Current State is: " + JSON.stringify(this.state));
-    event.preventDefault();
+  handleSubmit() {
+    const newStaff = {
+      name: this.state.name,
+      doB: this.state.doB,
+      salaryScale: this.state.salaryScale,
+      startDate: this.state.startDate,
+      department: this.state.department,
+      annualLeave: this.state.annualLeave,
+      overTime: this.state.overTime,
+      image: this.state.image,
+    };
+    this.props.onAdd(newStaff);
   }
 
   validate(name, doB, salaryScale, startDate, annualLeave, overTime) {

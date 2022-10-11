@@ -17,7 +17,18 @@ class Main extends Component {
       person: STAFFS,
       department: DEPARTMENTS,
     };
+    this.addStaff = this.addStaff.bind(this);
   }
+
+  addStaff = (staff) => {
+    const id = Math.floor(Math.random() * 10000 + 1);
+    const newStaff = { id, ...staff };
+    this.setState({
+      person: [...this.state.person, newStaff],
+    });
+    console.log(newStaff);
+    console.log(this.state.person);
+  };
 
   render() {
     const PersonWithId = ({ match }) => {
@@ -40,7 +51,9 @@ class Main extends Component {
           <Route
             exact
             path="/stafflist"
-            component={() => <StaffList staffs={this.state.person} />}
+            component={() => (
+              <StaffList onAdd={this.addStaff} staffs={this.state.person} />
+            )}
           />
 
           <Route exact path="/stafflist/:personId" component={PersonWithId} />
