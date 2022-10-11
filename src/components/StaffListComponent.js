@@ -33,10 +33,21 @@ class StaffList extends Component {
       salary: 30000,
       image: "/assets/images/alberto.png",
       isModalOpen: false,
+      touched: {
+        name: false,
+        doB: false,
+        salaryScale: false,
+        startDate: false,
+        department: false,
+        annualLeave: false,
+        overTime: false,
+      },
     };
-    console.log(this.props.staffs);
+
     this.handleSearchStaff = this.handleSearchStaff.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   toggleModal() {
@@ -53,13 +64,21 @@ class StaffList extends Component {
     console.log(event.target);
   }
 
-  // handleChange(event) {
-  //   // event.preventDefault();
-  //   this.setState({
-  //     search: event.target.value,
-  //   });
-  //   console.log(event.target);
-  // }
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleBlur = (field) => (evt) => {
+    this.setState({
+      touched: { ...this.state.touched, [field]: true },
+    });
+  };
 
   render() {
     const staff = this.props.staffs
@@ -145,14 +164,14 @@ class StaffList extends Component {
               </FormGroup>
 
               <FormGroup row>
-                <Label htmlFor="birthyear" md={4}>
+                <Label htmlFor="doB" md={4}>
                   Ngày sinh
                 </Label>
                 <Col md={8}>
                   <Input
                     type="date"
-                    id="birthyear"
-                    name="birthyear"
+                    id="doB"
+                    name="doB"
                     placeholder="dd/mm/yyyy"
                     value={this.state.doB}
                   />
@@ -160,14 +179,14 @@ class StaffList extends Component {
               </FormGroup>
 
               <FormGroup row>
-                <Label htmlFor="birthyear" md={4}>
+                <Label htmlFor="startDate" md={4}>
                   Ngày vào công ty
                 </Label>
                 <Col md={8}>
                   <Input
                     type="date"
-                    id="birthyear"
-                    name="birthyear"
+                    id="startDate"
+                    name="startDate"
                     placeholder="dd/mm/yyyy"
                     value={this.state.startDate}
                   />
@@ -175,14 +194,14 @@ class StaffList extends Component {
               </FormGroup>
 
               <FormGroup row>
-                <Label htmlFor="birthyear" md={4}>
+                <Label htmlFor="department" md={4}>
                   Phòng ban
                 </Label>
                 <Col md={8}>
                   <Input
                     type="select"
-                    id="birthyear"
-                    name="birthyear"
+                    id="department"
+                    name="department"
                     value={this.state.department}
                   >
                     <option>Sale</option>
@@ -195,44 +214,52 @@ class StaffList extends Component {
               </FormGroup>
 
               <FormGroup row>
-                <Label htmlFor="birthyear" md={4}>
+                <Label htmlFor="salaryScale" md={4}>
                   Hệ số lương
                 </Label>
                 <Col md={8}>
                   <Input
                     type="number"
-                    id="birthyear"
-                    name="birthyear"
+                    id="salaryScale"
+                    name="salaryScale"
                     value={this.state.salaryScale}
                   />
                 </Col>
               </FormGroup>
 
               <FormGroup row>
-                <Label htmlFor="birthyear" md={4}>
+                <Label htmlFor="annualLeave" md={4}>
                   Số ngày nghỉ còn lại
                 </Label>
                 <Col md={8}>
                   <Input
                     type="number"
-                    id="birthyear"
-                    name="birthyear"
+                    id="annualLeave"
+                    name="annualLeave"
                     value={this.state.annualLeave}
                   />
                 </Col>
               </FormGroup>
 
               <FormGroup row>
-                <Label htmlFor="birthyear" md={4}>
+                <Label htmlFor="overTime" md={4}>
                   Số ngày đã làm thêm
                 </Label>
                 <Col md={8}>
                   <Input
                     type="number"
-                    id="birthyear"
-                    name="birthyear"
+                    id="overTime"
+                    name="overTime"
                     value={this.state.overTime}
                   />
+                </Col>
+              </FormGroup>
+
+              <FormGroup row>
+                <Col md={{ size: 10, offset: 5 }}>
+                  <Button type="submit" color="success">
+                    Thêm
+                  </Button>
                 </Col>
               </FormGroup>
             </Form>
