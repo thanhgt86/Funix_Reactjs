@@ -38,7 +38,6 @@ class StaffList extends Component {
         doB: false,
         salaryScale: false,
         startDate: false,
-        department: false,
         annualLeave: false,
         overTime: false,
       },
@@ -48,6 +47,7 @@ class StaffList extends Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   toggleModal() {
@@ -80,7 +80,54 @@ class StaffList extends Component {
     });
   };
 
+  handleSubmit(event) {
+    console.log("Current State is: " + JSON.stringify(this.state));
+    alert("Current State is: " + JSON.stringify(this.state));
+    event.preventDefault();
+  }
+
+  validate(name, doB, salaryScale, startDate, annualLeave, overTime) {
+    const errors = {
+      name1: "",
+      doB1: "",
+      salaryScale1: "",
+      startDate1: "",
+      annualLeave1: "",
+      overTime1: "",
+    };
+
+    if (this.state.touched.name && name.length < 3)
+      errors.name1 = "Yêu cầu Nhập, Name should be >= 3 characters.";
+    else if (this.state.touched.name && name.length > 21)
+      errors.name1 = "Yêu cầu Nhập, Name should be <= 20 characters.";
+
+    if (this.state.touched.doB && doB.length < 3) errors.doB1 = "Yêu cầu nhập.";
+
+    if (this.state.touched.salaryScale && salaryScale < 1)
+      errors.salaryScale1 = "Hệ số lương >=1";
+
+    if (this.state.touched.startDate && startDate.length < 3)
+      errors.startDate1 = "Yêu cầu nhập.";
+
+    if (this.state.touched.annualLeave && annualLeave < 0)
+      errors.annualLeave1 = "AnnualLeave >= 0";
+
+    if (this.state.touched.overTime && overTime < 0)
+      errors.overTime1 = "Thời gian làm thêm >= 0 ";
+
+    return errors;
+  }
+
   render() {
+    const errors = this.validate(
+      this.state.name,
+      this.state.doB,
+      this.state.salaryScale,
+      this.state.startDate,
+      this.state.annualLeave,
+      this.state.overTime
+    );
+
     const staff = this.props.staffs
       .filter((staff) => {
         if (this.state.search === "") return staff;
@@ -147,7 +194,7 @@ class StaffList extends Component {
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Thêm Nhân Viên</ModalHeader>
           <ModalBody>
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
               <FormGroup row>
                 <Label htmlFor="name" md={4}>
                   Tên
@@ -159,7 +206,12 @@ class StaffList extends Component {
                     name="name"
                     placeholder="Nhập tên nhân viên"
                     value={this.state.name}
+                    valid={errors.name1 === ""}
+                    invalid={errors.name1 !== ""}
+                    onBlur={this.handleBlur("name")}
+                    onChange={this.handleInputChange}
                   />
+                  <FormFeedback>{errors.name1}</FormFeedback>
                 </Col>
               </FormGroup>
 
@@ -174,7 +226,12 @@ class StaffList extends Component {
                     name="doB"
                     placeholder="dd/mm/yyyy"
                     value={this.state.doB}
+                    valid={errors.doB1 === ""}
+                    invalid={errors.doB1 !== ""}
+                    onBlur={this.handleBlur("doB")}
+                    onChange={this.handleInputChange}
                   />
+                  <FormFeedback>{errors.doB1}</FormFeedback>
                 </Col>
               </FormGroup>
 
@@ -189,7 +246,12 @@ class StaffList extends Component {
                     name="startDate"
                     placeholder="dd/mm/yyyy"
                     value={this.state.startDate}
+                    valid={errors.startDate1 === ""}
+                    invalid={errors.startDate1 !== ""}
+                    onBlur={this.handleBlur("startDate")}
+                    onChange={this.handleInputChange}
                   />
+                  <FormFeedback>{errors.startDate1}</FormFeedback>
                 </Col>
               </FormGroup>
 
@@ -203,6 +265,7 @@ class StaffList extends Component {
                     id="department"
                     name="department"
                     value={this.state.department}
+                    onChange={this.handleInputChange}
                   >
                     <option>Sale</option>
                     <option>HR</option>
@@ -223,7 +286,12 @@ class StaffList extends Component {
                     id="salaryScale"
                     name="salaryScale"
                     value={this.state.salaryScale}
+                    valid={errors.salaryScale1 === ""}
+                    invalid={errors.salaryScale1 !== ""}
+                    onBlur={this.handleBlur("salaryScale")}
+                    onChange={this.handleInputChange}
                   />
+                  <FormFeedback>{errors.salaryScale1}</FormFeedback>
                 </Col>
               </FormGroup>
 
@@ -237,7 +305,12 @@ class StaffList extends Component {
                     id="annualLeave"
                     name="annualLeave"
                     value={this.state.annualLeave}
+                    valid={errors.annualLeave1 === ""}
+                    invalid={errors.annualLeave1 !== ""}
+                    onBlur={this.handleBlur("annualLeave")}
+                    onChange={this.handleInputChange}
                   />
+                  <FormFeedback>{errors.annualLeave1}</FormFeedback>
                 </Col>
               </FormGroup>
 
@@ -251,7 +324,12 @@ class StaffList extends Component {
                     id="overTime"
                     name="overTime"
                     value={this.state.overTime}
+                    valid={errors.overTime1 === ""}
+                    invalid={errors.overTime1 !== ""}
+                    onBlur={this.handleBlur("overTime")}
+                    onChange={this.handleInputChange}
                   />
+                  <FormFeedback>{errors.overTime1}</FormFeedback>
                 </Col>
               </FormGroup>
 
