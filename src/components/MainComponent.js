@@ -21,7 +21,7 @@ class Main extends Component {
 
   render() {
     const PersonWithId = ({ match }) => {
-      console.log(match.params);
+      console.log(match);
       return (
         <PersonDetail
           person={
