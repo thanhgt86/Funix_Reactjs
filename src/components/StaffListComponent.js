@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { DEPARTMENTS } from "../shared/staffs";
 // import { LocalForm } from "react-redux-form";
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
@@ -86,12 +87,17 @@ class StaffList extends Component {
       doB: this.state.doB,
       salaryScale: this.state.salaryScale,
       startDate: this.state.startDate,
-      department: this.state.department,
+      department: {
+        id: DEPARTMENTS.filter((dept) => dept.name === this.state.department)[0]
+          .id,
+      },
+
       annualLeave: this.state.annualLeave,
       overTime: this.state.overTime,
       image: this.state.image,
     };
-    this.props.onAdd(newStaff);
+    console.log(newStaff);
+    this.props.addNewStaff(newStaff);
   }
 
   validate(name, doB, salaryScale, startDate, annualLeave, overTime) {

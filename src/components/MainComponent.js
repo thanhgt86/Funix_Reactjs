@@ -52,7 +52,10 @@ class Main extends Component {
             exact
             path="/stafflist"
             component={() => (
-              <StaffList onAdd={this.addStaff} staffs={this.state.person} />
+              <StaffList
+                addNewStaff={this.addStaff}
+                staffs={this.state.person}
+              />
             )}
           />
 
