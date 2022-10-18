@@ -7,15 +7,21 @@ import { STAFFS } from "./shared/staffs";
 import Main from "./components/MainComponent";
 import Footer from "./components/FooterComponent";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { Provider } from "react-redux";
+import { ConfigureStore } from "./redux/configureStore";
+
+const store = ConfigureStore();
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <div>
-          <Main />
-        </div>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div>
+            <Main />
+          </div>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }
