@@ -8,13 +8,23 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import Department from "./Department";
 import Salary from "./Salary";
 import { connect } from "react-redux";
+import { fetchStaffs } from "../redux/ActionCreators";
+import { actions } from "react-redux-form";
 
 const mapStateToProps = (state) => {
+  //state tổng thể từ store
   return {
     person: state.person,
     department: state.department,
   };
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  // giúp fetchStaffs luôn có sẵn trong Main Component
+  fetchStaffs: () => {
+    dispatch(fetchStaffs());
+  },
+});
 
 class Main extends Component {
   constructor(props) {
@@ -22,27 +32,32 @@ class Main extends Component {
 
     this.addStaff = this.addStaff.bind(this);
   }
+  // bất cứ nội dung nào trong componentDidMount sẽ được thực thi ngay sau khi ngay sau khi Main Component gắn vào view của ứng dụng
+  componentDidMount() {
+    this.props.fetchStaffs();
+  }
 
   addStaff = (staff) => {
     const id = Math.floor(Math.random() * 10000 + 1);
     const newStaff = { id, ...staff };
     this.setState({
-      person: [...this.props.person, newStaff],
+      person: [...this.props.person.person, newStaff],
     });
     console.log(newStaff);
-    console.log(this.props.person);
   };
 
   render() {
     const PersonWithId = ({ match }) => {
       console.log(match);
+      console.log(this.props.person);
       return (
         <PersonDetail
           person={
-            this.props.person.filter(
+            this.props.person.person.filter(
               (staff) => staff.id === parseInt(match.params.personId, 10)
             )[0]
           }
+          staffsLoading={this.props.person.person.isLoading}
         />
       );
     };
@@ -57,7 +72,7 @@ class Main extends Component {
             component={() => (
               <StaffList
                 addNewStaff={this.addStaff}
-                staffs={this.props.person}
+                staffs={this.props.person.person}
               />
             )}
           />
@@ -66,13 +81,15 @@ class Main extends Component {
           <Route
             exact
             path="/department"
-            component={() => <Department department={this.props.department} />}
+            component={() => (
+              <Department department={this.props.department.department} />
+            )}
           />
 
           <Route
             exact
             path="/salary"
-            component={() => <Salary salary={this.props.person} />}
+            component={() => <Salary salary={this.props.person.person} />}
           />
 
           <Redirect to="/stafflist" />
@@ -83,4 +100,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

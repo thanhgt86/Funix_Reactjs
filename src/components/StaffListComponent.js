@@ -18,6 +18,7 @@ import {
   ModalHeader,
   ModalBody,
 } from "reactstrap";
+import { Loading } from "./LoadingComponent";
 
 class StaffList extends Component {
   constructor(props) {
@@ -152,8 +153,8 @@ class StaffList extends Component {
       })
       .map((person) => {
         return (
-          <div className="col-md-2 col-sm-4 col-xs-6 mb-3">
-            <Card key={person.id}>
+          <div className="col-md-2 col-sm-4 col-xs-6 mb-3" key={person.id}>
+            <Card>
               <Link to={`/staffList/${person.id}`}>
                 <CardImg width="100%" src={person.image} alt={person.name} />
                 <CardTitle className="text-center my-2">
