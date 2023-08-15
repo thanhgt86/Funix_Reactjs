@@ -17,7 +17,7 @@ export const fetchStaffs = () => (dispatch) => {
       },
       (error) => {
         // xử lý lỗi với trường hợp máy chủ không phản hồi
-        var errmess = new Error(error.message);
+        const errmess = new Error(error.message);
         throw errmess;
       }
     )
@@ -38,4 +38,44 @@ export const staffsFailed = (errmess) => ({
 export const addStaffs = (staffs) => ({
   type: ActionTypes.ADD_STAFFS,
   payload: staffs,
+});
+
+// /////////////////// ActionCreator for Department
+export const fetchDeparts = () => (dispatch) => {
+  dispatch(departsLoading());
+
+  return fetch(baseUrl + "departments")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          throw new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+        }
+      },
+      (error) => {
+        // xử lý lỗi với trường hợp máy chủ không phản hồi
+        const errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
+    .then((response) => response.json())
+    .then((departs) => dispatch(addDeparts(departs)))
+    .catch((error) => dispatch(departsFailed(error.message)));
+};
+
+export const departsLoading = () => ({
+  type: ActionTypes.DEPARTS_LOADING,
+});
+
+export const departsFailed = (errmess) => ({
+  type: ActionTypes.DEPARTS_FAILED,
+  payload: errmess,
+});
+
+export const addDeparts = (departs) => ({
+  type: ActionTypes.ADD_DEPARTS,
+  payload: departs,
 });

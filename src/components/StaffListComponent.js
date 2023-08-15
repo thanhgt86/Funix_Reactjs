@@ -147,7 +147,7 @@ class StaffList extends Component {
       if (this.props.isLoading) {
         return <Loading />;
       } else if (this.props.errMess) {
-        return <h4 className="text-danger mt-3">{this.props.errMess}</h4>;
+        return <h4 className="text-danger m-3">{this.props.errMess}</h4>;
       } else
         return this.props.staffs
           .filter((staff) => {
@@ -211,7 +211,7 @@ class StaffList extends Component {
             </div>
           </Form>
         </div>
-        <div className="row justify-content-center">{staff()}</div>
+        <div className="row">{staff()}</div>
 
         <div className="mt-3">
           <p>Bấm vào để xem thông tin nhân viên</p>

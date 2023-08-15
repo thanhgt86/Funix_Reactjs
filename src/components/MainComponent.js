@@ -9,6 +9,7 @@ import Department from "./Department";
 import Salary from "./Salary";
 import { connect } from "react-redux";
 import { fetchStaffs } from "../redux/ActionCreators";
+import { fetchDeparts } from "../redux/ActionCreators";
 import { actions } from "react-redux-form";
 
 const mapStateToProps = (state) => {
@@ -24,6 +25,10 @@ const mapDispatchToProps = (dispatch) => ({
   fetchStaffs: () => {
     dispatch(fetchStaffs());
   },
+
+  fetchDeparts: () => {
+    dispatch(fetchDeparts());
+  },
 });
 
 class Main extends Component {
@@ -35,6 +40,7 @@ class Main extends Component {
   // bất cứ nội dung nào trong componentDidMount sẽ được thực thi ngay sau khi ngay sau khi Main Component gắn vào view của ứng dụng
   componentDidMount() {
     this.props.fetchStaffs();
+    this.props.fetchDeparts();
   }
 
   addStaff = (staff) => {
@@ -80,11 +86,16 @@ class Main extends Component {
           />
 
           <Route exact path="/stafflist/:personId" component={PersonWithId} />
+
           <Route
             exact
             path="/department"
             component={() => (
-              <Department department={this.props.department.department} />
+              <Department
+                department={this.props.department.department}
+                errMess={this.props.department.errMess}
+                isLoading={this.props.department.isLoading}
+              />
             )}
           />
 
