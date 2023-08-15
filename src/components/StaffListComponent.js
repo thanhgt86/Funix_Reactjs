@@ -143,28 +143,39 @@ class StaffList extends Component {
       this.state.overTime
     );
 
-    const staff = this.props.staffs
-      .filter((staff) => {
-        if (this.state.search === "") return staff;
-        else if (
-          staff.name.toLowerCase().includes(this.state.search.toLowerCase())
-        )
-          return staff;
-      })
-      .map((person) => {
-        return (
-          <div className="col-md-2 col-sm-4 col-xs-6 mb-3" key={person.id}>
-            <Card>
-              <Link to={`/staffList/${person.id}`}>
-                <CardImg width="100%" src={person.image} alt={person.name} />
-                <CardTitle className="text-center my-2">
-                  {person.name}
-                </CardTitle>
-              </Link>
-            </Card>
-          </div>
-        );
-      });
+    const staff = () => {
+      if (this.props.isLoading) {
+        return <Loading />;
+      } else if (this.props.errMess) {
+        return <h4 className="text-danger mt-3">{this.props.errMess}</h4>;
+      } else
+        return this.props.staffs
+          .filter((staff) => {
+            if (this.state.search === "") return staff;
+            else if (
+              staff.name.toLowerCase().includes(this.state.search.toLowerCase())
+            )
+              return staff;
+          })
+          .map((person) => {
+            return (
+              <div className="col-md-2 col-sm-4 col-xs-6 mb-3" key={person.id}>
+                <Card>
+                  <Link to={`/staffList/${person.id}`}>
+                    <CardImg
+                      width="100%"
+                      src={person.image}
+                      alt={person.name}
+                    />
+                    <CardTitle className="text-center my-2">
+                      {person.name}
+                    </CardTitle>
+                  </Link>
+                </Card>
+              </div>
+            );
+          });
+    };
 
     return (
       <div className="container">
@@ -200,7 +211,7 @@ class StaffList extends Component {
             </div>
           </Form>
         </div>
-        <div className="row">{staff}</div>
+        <div className="row justify-content-center">{staff()}</div>
 
         <div className="mt-3">
           <p>Bấm vào để xem thông tin nhân viên</p>

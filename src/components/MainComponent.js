@@ -73,6 +73,8 @@ class Main extends Component {
               <StaffList
                 addNewStaff={this.addStaff}
                 staffs={this.props.person.person}
+                errMess={this.props.person.errMess}
+                isLoading={this.props.person.isLoading}
               />
             )}
           />
