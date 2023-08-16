@@ -5,3 +5,7 @@ export const STAFFS_FAILED = "STAFFS_FAILED";
 export const ADD_DEPARTS = "ADD_DEPARTS";
 export const DEPARTS_LOADING = "DEPARTS_LOADING";
 export const DEPARTS_FAILED = "DEPARTS_FAILED";
+
+export const ADD_SALARY = "ADD_SALARY";
+export const SALARY_LOADING = "SALARY_LOADING";
+export const SALARY_FAILED = "SALARY_FAILED";

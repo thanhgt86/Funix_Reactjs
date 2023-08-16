@@ -12,7 +12,7 @@ function Department(props) {
     } else
       return props.department.map((depart) => {
         return (
-          <div className="col-md-4 col-sm-6 col-xs-12">
+          <div className="col-md-4 col-sm-6 col-xs-12" key={depart.id}>
             <Link to={`/department/${depart.id}`}>
               <Card className="departarea">
                 <CardBody>

@@ -10,6 +10,7 @@ import Salary from "./Salary";
 import { connect } from "react-redux";
 import { fetchStaffs } from "../redux/ActionCreators";
 import { fetchDeparts } from "../redux/ActionCreators";
+import { fetchSalary } from "../redux/ActionCreators";
 import { actions } from "react-redux-form";
 
 const mapStateToProps = (state) => {
@@ -17,6 +18,7 @@ const mapStateToProps = (state) => {
   return {
     person: state.person,
     department: state.department,
+    salary: state.salary,
   };
 };
 
@@ -28,6 +30,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   fetchDeparts: () => {
     dispatch(fetchDeparts());
+  },
+
+  fetchSalary: () => {
+    dispatch(fetchSalary());
   },
 });
 
@@ -41,6 +47,7 @@ class Main extends Component {
   componentDidMount() {
     this.props.fetchStaffs();
     this.props.fetchDeparts();
+    this.props.fetchSalary();
   }
 
   addStaff = (staff) => {
@@ -61,7 +68,7 @@ class Main extends Component {
               (staff) => staff.id === parseInt(match.params.personId, 10)
             )[0]
           }
-          staffsLoading={this.props.person.person.isLoading}
+          department={this.props.department.department}
         />
       );
     };
@@ -118,7 +125,13 @@ class Main extends Component {
           <Route
             exact
             path="/salary"
-            component={() => <Salary salary={this.props.person.person} />}
+            component={() => (
+              <Salary
+                salary={this.props.salary.salary}
+                errMess={this.props.salary.errMess}
+                isLoading={this.props.salary.isLoading}
+              />
+            )}
           />
 
           <Redirect to="/stafflist" />

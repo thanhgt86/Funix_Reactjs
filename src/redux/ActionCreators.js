@@ -79,3 +79,43 @@ export const addDeparts = (departs) => ({
   type: ActionTypes.ADD_DEPARTS,
   payload: departs,
 });
+
+// /////////////////// ActionCreator for Salary
+export const fetchSalary = () => (dispatch) => {
+  dispatch(salaryLoading());
+
+  return fetch(baseUrl + "staffsSalary")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          throw new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+        }
+      },
+      (error) => {
+        // xử lý lỗi với trường hợp máy chủ không phản hồi
+        const errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
+    .then((response) => response.json())
+    .then((salary) => dispatch(addSalary(salary)))
+    .catch((error) => dispatch(salaryFailed(error.message)));
+};
+
+export const salaryLoading = () => ({
+  type: ActionTypes.SALARY_LOADING,
+});
+
+export const salaryFailed = (errmess) => ({
+  type: ActionTypes.SALARY_FAILED,
+  payload: errmess,
+});
+
+export const addSalary = (salary) => ({
+  type: ActionTypes.ADD_SALARY,
+  payload: salary,
+});
