@@ -54,8 +54,6 @@ class Main extends Component {
 
   render() {
     const PersonWithId = ({ match }) => {
-      console.log(match);
-      console.log(this.props.person);
       return (
         <PersonDetail
           person={
@@ -64,6 +62,18 @@ class Main extends Component {
             )[0]
           }
           staffsLoading={this.props.person.person.isLoading}
+        />
+      );
+    };
+
+    const DepartmentWithId = ({ match }) => {
+      return (
+        <StaffList
+          staffs={this.props.person.person.filter(
+            (staff) => staff.departmentId === match.params.departId
+          )}
+          errMess={this.props.person.errMess}
+          isLoading={this.props.person.isLoading}
         />
       );
     };
@@ -97,6 +107,12 @@ class Main extends Component {
                 isLoading={this.props.department.isLoading}
               />
             )}
+          />
+
+          <Route
+            exact
+            path="/department/:departId"
+            component={DepartmentWithId}
           />
 
           <Route
