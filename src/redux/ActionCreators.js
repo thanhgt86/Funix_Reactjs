@@ -39,6 +39,34 @@ export const addStaffs = (staffs) => ({
   type: ActionTypes.ADD_STAFFS,
   payload: staffs,
 });
+////////////////////////////////////////
+export const postStaffs = (staffs) => (dispatch) => {
+  return fetch(baseUrl + "staffs", {
+    method: "POST",
+    body: JSON.stringify(staffs),
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          throw new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+        }
+      },
+      (error) => {
+        // xử lý lỗi với trường hợp máy chủ không phản hồi
+        const errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
+    .then((response) => response.json())
+    .then((staffs) => dispatch(addStaffs(staffs)))
+    .catch((error) => dispatch(staffsFailed(error.message)));
+};
 
 // /////////////////// ActionCreator for Department
 export const fetchDeparts = () => (dispatch) => {

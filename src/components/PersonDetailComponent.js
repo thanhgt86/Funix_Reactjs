@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import { CardImg, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
-import { DEPARTMENTS } from "../shared/staffs";
-import { connect } from "react-redux";
-import { fetchStaffs } from "../redux/ActionCreators";
-import { fetchDeparts } from "../redux/ActionCreators";
 
 class PersonDetail extends Component {
   constructor(props) {
@@ -28,14 +24,7 @@ class PersonDetail extends Component {
               <p>
                 Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}
               </p>
-              <p>
-                Phòng ban:{" "}
-                {
-                  this.props.department.filter(
-                    (depat) => depat.id === staff.departmentId
-                  )[0].name
-                }
-              </p>
+              <p>Phòng ban: {staff.department}</p>
               <p>Số ngày nghỉ còn lại: {staff.annualLeave}</p>
               <p>Số ngày làm thêm: {staff.overTime}</p>
             </div>

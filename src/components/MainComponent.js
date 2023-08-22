@@ -9,8 +9,10 @@ import Department from "./Department";
 import Salary from "./Salary";
 import { connect } from "react-redux";
 import { fetchStaffs } from "../redux/ActionCreators";
+import { postStaffs } from "../redux/ActionCreators";
 import { fetchDeparts } from "../redux/ActionCreators";
 import { fetchSalary } from "../redux/ActionCreators";
+
 import { actions } from "react-redux-form";
 
 const mapStateToProps = (state) => {
@@ -28,6 +30,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchStaffs());
   },
 
+  postStaffs: (staffs) => {
+    dispatch(postStaffs(staffs));
+  },
+
   fetchDeparts: () => {
     dispatch(fetchDeparts());
   },
@@ -40,8 +46,6 @@ const mapDispatchToProps = (dispatch) => ({
 class Main extends Component {
   constructor(props) {
     super(props);
-
-    this.addStaff = this.addStaff.bind(this);
   }
   // bất cứ nội dung nào trong componentDidMount sẽ được thực thi ngay sau khi ngay sau khi Main Component gắn vào view của ứng dụng
   componentDidMount() {
@@ -49,15 +53,6 @@ class Main extends Component {
     this.props.fetchDeparts();
     this.props.fetchSalary();
   }
-
-  addStaff = (staff) => {
-    const id = Math.floor(Math.random() * 10000 + 1);
-    const newStaff = { id, ...staff };
-    this.setState({
-      person: [...this.props.person.person, newStaff],
-    });
-    console.log(newStaff);
-  };
 
   render() {
     const PersonWithId = ({ match }) => {
@@ -94,7 +89,7 @@ class Main extends Component {
             path="/stafflist"
             component={() => (
               <StaffList
-                addNewStaff={this.addStaff}
+                addNewStaff={this.props.postStaffs}
                 staffs={this.props.person.person}
                 errMess={this.props.person.errMess}
                 isLoading={this.props.person.isLoading}
