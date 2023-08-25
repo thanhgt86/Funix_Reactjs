@@ -91,11 +91,13 @@ class StaffList extends Component {
   handleSubmit(values) {
     console.log(values);
     const newStaff = {
-      name: values.name, //chọn name vì lấy giống model=".name"
+      name: values.name, //value.name follow model=".name"
       doB: values.doB,
       salaryScale: values.salaryScale,
       startDate: values.startDate,
-      department: values.dep,
+      departmentId: this.props.department.filter(
+        (depa) => depa.name === values.dep
+      )[0].id,
       annualLeave: values.annualLeave,
       overTime: values.overTime,
       image: "/assets/images/alberto.png",
