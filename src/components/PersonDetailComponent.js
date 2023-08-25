@@ -12,6 +12,7 @@ import {
   Row,
 } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import { FadeTransform } from "react-animation-components";
 
 const required = (val) => val && val.length && val !== "Select an Option";
 const minLength = (len) => (val) => !val || val.length >= len;
@@ -73,7 +74,14 @@ class PersonDetail extends Component {
       return (
         <div className="row">
           <div className="col-md-3 col-sm-4 col-xs-12">
-            <CardImg width="100%" src={staff.image} alt={staff.name} />
+            <FadeTransform
+              in
+              transformProps={{
+                exitTransform: "scale(0.5) translateY(-50%)",
+              }}
+            >
+              <CardImg width="100%" src={staff.image} alt={staff.name} />
+            </FadeTransform>
           </div>
           <div className="col-md-9 col-sm-8 col-xs-12">
             <p>

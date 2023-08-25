@@ -16,6 +16,7 @@ import {
 } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { Loading } from "./LoadingComponent";
+import { FadeTransform } from "react-animation-components";
 
 const required = (val) => val && val.length && val !== "Select an Option";
 const minLength = (len) => (val) => !val || val.length >= len;
@@ -120,18 +121,25 @@ class StaffList extends Component {
           .map((person) => {
             return (
               <div className="col-md-2 col-sm-4 col-xs-6 mb-3" key={person.id}>
-                <Card>
-                  <Link to={`/staffList/${person.id}`}>
-                    <CardImg
-                      width="100%"
-                      src={person.image}
-                      alt={person.name}
-                    />
-                    <CardTitle className="text-center my-2">
-                      {person.name}
-                    </CardTitle>
-                  </Link>
-                </Card>
+                <FadeTransform
+                  in
+                  transformProps={{
+                    exitTransform: "scale(0.5) translateY(-50%)",
+                  }}
+                >
+                  <Card>
+                    <Link to={`/staffList/${person.id}`}>
+                      <CardImg
+                        width="100%"
+                        src={person.image}
+                        alt={person.name}
+                      />
+                      <CardTitle className="text-center my-2">
+                        {person.name}
+                      </CardTitle>
+                    </Link>
+                  </Card>
+                </FadeTransform>
               </div>
             );
           });
