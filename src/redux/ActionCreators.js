@@ -1,5 +1,6 @@
 import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
+import { baseUrlId } from "../shared/baseUrl";
 
 export const fetchStaffs = () => (dispatch) => {
   dispatch(staffsLoading());
@@ -76,6 +77,33 @@ export const patchStaffs = (staffs) => (dispatch) => {
     body: JSON.stringify(staffs),
     headers: { "Content-Type": "application/json" },
     // credentials: "same-origin",
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          throw new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+        }
+      },
+      (error) => {
+        // xử lý lỗi với trường hợp máy chủ không phản hồi
+        const errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
+    .then((response) => response.json())
+    .then((staffs) => dispatch(addStaffs(staffs)))
+    .catch((error) => dispatch(staffsFailed(error.message)));
+};
+
+//////////////////////////////////////// DELETE
+export const deleteStaffs = (id) => (dispatch) => {
+  return fetch(baseUrlId + id, {
+    method: "DELETE",
+    headers: { "Content-type": "application/json; charset=UTF-8" },
   })
     .then(
       (response) => {

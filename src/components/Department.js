@@ -4,6 +4,17 @@ import { Loading } from "./LoadingComponent";
 import { Link } from "react-router-dom";
 
 function Department(props) {
+  //Tính toán số lượng nhân viên của từng phòng có xét trường hợp edit dữ liệu
+  const countNumberOfStaff = (departId) => {
+    let numberOfStaff = 0;
+    props.staffs.forEach((item) => {
+      if (item.departmentId === departId) {
+        numberOfStaff += 1;
+      }
+    });
+    return numberOfStaff;
+  };
+
   const depa = () => {
     if (props.isLoading) {
       return <Loading />;
@@ -18,7 +29,7 @@ function Department(props) {
                 <CardBody>
                   <CardTitle>{depart.name}</CardTitle>
                   <CardText>
-                    Số lượng nhân viên: {depart.numberOfStaff}
+                    Số lượng nhân viên: {countNumberOfStaff(depart.id)}
                   </CardText>
                 </CardBody>
               </Card>{" "}

@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 import { CardImg, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import dateFormat from "dateformat";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {
-  Card,
-  CardTitle,
-  Form,
-  FormGroup,
-  FormFeedback,
   Button,
   Label,
-  Input,
   Col,
   Modal,
   ModalHeader,
@@ -29,10 +23,12 @@ class PersonDetail extends Component {
     super(props);
     this.state = {
       isModalOpen: false,
+      redirect: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   toggleModal() {
@@ -49,13 +45,27 @@ class PersonDetail extends Component {
       doB: values.doB,
       salaryScale: values.salaryScale,
       startDate: values.startDate,
-      department: values.dep,
+      departmentId: this.props.department.filter(
+        (depa) => depa.name === values.dep
+      )[0].id,
       annualLeave: values.annualLeave,
       overTime: values.overTime,
       image: "/assets/images/alberto.png",
     };
     console.log(newStaff);
     this.props.editStaff(newStaff);
+  }
+
+  handleDelete() {
+    alert("Delete! Are you sure?");
+    this.props.deleteStaff(this.props.person.id);
+    this.setState({ redirect: true });
+  }
+
+  redirectToHomepage() {
+    if (this.state.redirect) {
+      return <Redirect to="/stafflist" />;
+    }
   }
 
   renderStaff(staff) {
@@ -94,6 +104,7 @@ class PersonDetail extends Component {
   render() {
     return (
       <div className="container">
+        {this.redirectToHomepage()}
         <div className="row">
           <Breadcrumb>
             <BreadcrumbItem>
@@ -114,7 +125,12 @@ class PersonDetail extends Component {
           >
             Sửa
           </Button>
-          <Button outline color="danger" style={{ marginLeft: "10px" }}>
+          <Button
+            outline
+            color="danger"
+            onClick={this.handleDelete}
+            style={{ marginLeft: "10px" }}
+          >
             Xóa
           </Button>
         </div>

@@ -11,10 +11,9 @@ import { connect } from "react-redux";
 import { fetchStaffs } from "../redux/ActionCreators";
 import { postStaffs } from "../redux/ActionCreators";
 import { patchStaffs } from "../redux/ActionCreators";
+import { deleteStaffs } from "../redux/ActionCreators";
 import { fetchDeparts } from "../redux/ActionCreators";
 import { fetchSalary } from "../redux/ActionCreators";
-
-import { actions } from "react-redux-form";
 
 const mapStateToProps = (state) => {
   //state tổng thể từ store
@@ -37,6 +36,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   patchStaffs: (staffs) => {
     dispatch(patchStaffs(staffs));
+  },
+
+  deleteStaffs: (id) => {
+    dispatch(deleteStaffs(id));
   },
 
   fetchDeparts: () => {
@@ -70,6 +73,7 @@ class Main extends Component {
           }
           department={this.props.department.department}
           editStaff={this.props.patchStaffs}
+          deleteStaff={this.props.deleteStaffs}
         />
       );
     };
@@ -112,6 +116,7 @@ class Main extends Component {
             component={() => (
               <Department
                 department={this.props.department.department}
+                staffs={this.props.person.person}
                 errMess={this.props.department.errMess}
                 isLoading={this.props.department.isLoading}
               />
