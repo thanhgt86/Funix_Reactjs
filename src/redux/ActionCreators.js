@@ -2,6 +2,7 @@ import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
 import { baseUrlId } from "../shared/baseUrl";
 
+// /////////////////// Fetch STAFF
 export const fetchStaffs = () => (dispatch) => {
   dispatch(staffsLoading());
 

@@ -28,30 +28,12 @@ class StaffList extends Component {
     super(props);
     this.state = {
       search: "",
-      name: "",
-      doB: "",
-      salaryScale: 1,
-      startDate: "",
-      department: "Sale",
-      annualLeave: 0,
-      overTime: 0,
-      salary: 30000,
-      image: "/assets/images/alberto.png",
       isModalOpen: false,
-      touched: {
-        name: false,
-        doB: false,
-        salaryScale: false,
-        startDate: false,
-        annualLeave: false,
-        overTime: false,
-      },
     };
 
     this.handleSearchStaff = this.handleSearchStaff.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -68,22 +50,6 @@ class StaffList extends Component {
     });
     console.log(event.target);
   }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  handleBlur = (field) => (evt) => {
-    this.setState({
-      touched: { ...this.state.touched, [field]: true },
-    });
-  };
 
   handleSubmit(values) {
     console.log(values);
