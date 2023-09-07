@@ -8,13 +8,14 @@ import {
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../shared/baseUrl";
 
 function RenderLeader({ leader }) {
   return (
     <Media>
       <Media
         object
-        src={leader.image}
+        src={baseUrl + leader.image}
         alt={leader.name}
         className="mr-3 mt-4"
       />
