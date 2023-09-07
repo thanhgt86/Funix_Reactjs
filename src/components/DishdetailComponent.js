@@ -107,6 +107,7 @@ class CommentForm extends Component {
   }
 
   handleSubmit(values) {
+    console.log(values);
     this.toggleModal();
     this.props.postComment(
       this.props.dishId,

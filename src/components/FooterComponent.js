@@ -44,16 +44,16 @@ function Footer(props) {
           <div className="col-12 col-sm-4 align-self-center">
             <div className="text-center">
               <a className="btn btn-social-icon btn-google" href="#">
-                <i class="fa fa-google" aria-hidden="true"></i>
+                <i className="fa fa-google" aria-hidden="true"></i>
               </a>
               <a className="btn btn-social-icon btn-facebook" href="#">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <i className="fa fa-facebook" aria-hidden="true"></i>
               </a>
               <a className="btn btn-social-icon btn-linkedin" href="#">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                <i className="fa fa-linkedin" aria-hidden="true"></i>
               </a>
               <a className="btn btn-social-icon btn-twitter" href="#">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i className="fa fa-twitter" aria-hidden="true"></i>
               </a>
             </div>
           </div>
@@ -61,7 +61,7 @@ function Footer(props) {
 
         <div className="row justify-content-center">
           <div className="col-auto">
-            <p>Copyright 2022 by Thanh</p>
+            <p>Copyright 2022 by Ristorante con Fusion</p>
           </div>
         </div>
       </div>
